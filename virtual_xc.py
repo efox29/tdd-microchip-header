@@ -7,19 +7,18 @@ data = f.read()
 f.close()
 
 
-#
-pattern = "typedef\s+union\s+\{(\n.+)+bits_t;"
+
+pattern = "(typedef\s+union\s+\{(\n.+)+bits_t;)"
+#pattern = "typedef\s+union"
 
 regex = re.compile(pattern,re.MULTILINE)
 # matches = [m.groups() for m in regex.finditer(data)]
-matches = re.search(pattern,data,re.MULTILINE)
+matches = re.findall(pattern,data,re.MULTILINE)
 # for m in matches:
 #     print (m)
 
 if(matches):
-    for m in matches.regs:
-        start = matches.start()
-        end = matches.end()
-        print(data[start:end]+'\n\n')
+    for m in matches:
+        print(m[0]+"\n\n")
 
 #print(rs)
