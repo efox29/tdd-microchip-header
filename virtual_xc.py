@@ -3,27 +3,20 @@ import re
 
 f = open('pic16lf15345.h')
 data = f.read()
-#print(data)
 f.close()
 
-
-
 pattern = "(typedef\s+union\s+{[\s\S]*?bits_t;)"
-#pattern = "typedef\s+union"
 
-regex = re.compile(pattern,re.MULTILINE)
-# matches = [m.groups() for m in regex.finditer(data)]
 matches = re.findall(pattern,data,re.MULTILINE)
-# for m in matches:
-#     print (m)
 
 if(matches):
     # open a file
-    f = open("parsed_file.c","w")
-    for m in matches:
-        print(m+"\n\n")
-        f.write(m)
+    f = open("virtual_xc.h","w")
+    for m in matches:   
+        """ not sure why I had to write \r\n twice essentially, but could not get it otherwise """    
+        buf = m + "\r\n"        
+        f.write(buf) 
+        f.write("\n")        
 
     f.close()
 
-#print(rs)
