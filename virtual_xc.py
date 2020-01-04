@@ -8,7 +8,7 @@ f.close()
 
 
 
-pattern = "(typedef\s+union\s+\{(\n.+)+bits_t;)"
+pattern = "(typedef\s+union\s+{[\s\S]*?bits_t;)"
 #pattern = "typedef\s+union"
 
 regex = re.compile(pattern,re.MULTILINE)
@@ -18,7 +18,12 @@ matches = re.findall(pattern,data,re.MULTILINE)
 #     print (m)
 
 if(matches):
+    # open a file
+    f = open("parsed_file.c","w")
     for m in matches:
-        print(m[0]+"\n\n")
+        print(m+"\n\n")
+        f.write(m)
+
+    f.close()
 
 #print(rs)
